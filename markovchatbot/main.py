@@ -1,4 +1,4 @@
-from chatbot.chatbot import ChatBot
+from chatbot.markovchatbot.chatbot import ChatBot
 
 quitTerms = ["quit", "q", "exit", "finish"]
 

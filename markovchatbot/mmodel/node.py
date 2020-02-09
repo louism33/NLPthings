@@ -1,4 +1,4 @@
-from chatbot.mmodel import Connection
+from chatbot.markovchatbot.mmodel.connection import Connection
 
 
 class Node:

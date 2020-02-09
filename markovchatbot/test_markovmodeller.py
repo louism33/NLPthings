@@ -1,7 +1,7 @@
 from unittest import TestCase
 
-from chatbot import markovmodeller
-from chatbot.mmodel import MarkovModel
+from chatbot.markovchatbot import markovmodeller
+from chatbot.markovchatbot.mmodel.markovmodel import MarkovModel
 
 
 class Test_Markov(TestCase):

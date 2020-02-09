@@ -1,4 +1,4 @@
-from chatbot.mmodel import Node
+from chatbot.markovchatbot.mmodel.node import Node
 
 
 class MarkovModel:

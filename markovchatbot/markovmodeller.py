@@ -1,5 +1,6 @@
 import nltk
-from chatbot.mmodel import MarkovModel
+
+from chatbot.markovchatbot.mmodel.markovmodel import MarkovModel
 
 separator = " "
 
