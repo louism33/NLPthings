@@ -65,19 +65,20 @@ class Test_Markov_Basics(TestCase):
     def test_basic_random_walk(self):
         model = markovmodeller.build_markov_model(self.basic_text)
         self.assertEqual(len(model), 5)
-        walk_string = markovmodeller.get_totally_random_walk(model)
+        walk_string = markovmodeller.get_max_walk(model)
         self.assertEqual("hello i am a robot", walk_string)
 
     def test_basic_random_walk_2(self):
         model = markovmodeller.build_markov_model(self.basic_text_full_stop)
         self.assertEqual(len(model), 6)
-        walk_string = markovmodeller.get_totally_random_walk(model)
+        walk_string = markovmodeller.get_max_walk(model)
         self.assertEqual("hello i am a robot .", walk_string)
 
 
 class Test_Markov_Multiple(TestCase):
     basic_text = "Hello I am a robot. Hello I am a robot."
     basic_text_cyborg = "Hello I am a robot. Hello I am a robot. heLlO i Am A hUmAn"
+    text_punctuation = "Hello! I, am a: robot. How are you?"
 
     def test_build_markov_model(self):
         model = markovmodeller.build_markov_model(self.basic_text)
@@ -85,6 +86,14 @@ class Test_Markov_Multiple(TestCase):
         self.assertEqual(len(model), 6)
         start_node = model.get_start_node()
         self.assertEqual(len(start_node.connections), 1)
+        self.assertEqual(len(model.find_node_by_name("i").connections), 1)
+        self.assertEqual(len(model.find_node_by_name("am").connections), 1)
+
+    def test_build_markov_model_punctuation(self):
+        model = markovmodeller.build_markov_model(self.text_punctuation)
+        self.assertEqual(len(model), 13)
+        start_node = model.get_start_node()
+        self.assertEqual(len(start_node.connections), 3)
         self.assertEqual(len(model.find_node_by_name("i").connections), 1)
         self.assertEqual(len(model.find_node_by_name("am").connections), 1)
 
@@ -97,3 +106,8 @@ class Test_Markov_Multiple(TestCase):
         self.assertEqual(len(model.find_node_by_name("am").connections), 1)
         self.assertEqual(len(model.find_node_by_name("a").connections), 2)
 
+        walk_string_max = markovmodeller.get_max_walk(model)
+        self.assertTrue("hello i am a robot ." == walk_string_max)
+
+        walk_string = markovmodeller.get_walk(model)
+        self.assertTrue("hello i am a robot ." == walk_string or "hello i am a human ." == walk_string)
