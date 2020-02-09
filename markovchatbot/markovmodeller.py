@@ -20,7 +20,7 @@ def build_markov_model(text):
     return model
 
 
-def get_strongest_walk(model: MarkovModel):
+def get_totally_random_walk(model: MarkovModel):
     start_node = model.get_start_node()
     return_string = ""
     end_node_found = False
@@ -31,7 +31,7 @@ def get_strongest_walk(model: MarkovModel):
             break
         destination_node = connection.destination_node
         return_string += separator + destination_node.word
-        # print(return_string)
+        print(destination_node)
         node = destination_node
 
     return return_string.lstrip()

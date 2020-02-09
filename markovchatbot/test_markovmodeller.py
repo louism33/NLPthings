@@ -65,12 +65,12 @@ class Test_Markov(TestCase):
     def test_basic_random_walk(self):
         model = markovmodeller.build_markov_model(self.basic_text)
         self.assertEqual(len(model), 5)
-        walk_string = markovmodeller.get_strongest_walk(model)
+        walk_string = markovmodeller.get_totally_random_walk(model)
         self.assertEqual("hello i am a robot", walk_string)
 
     def test_basic_random_walk_2(self):
         model = markovmodeller.build_markov_model(self.basic_text_full_stop)
         self.assertEqual(len(model), 6)
-        walk_string = markovmodeller.get_strongest_walk(model)
+        walk_string = markovmodeller.get_totally_random_walk(model)
         self.assertEqual("hello i am a robot .", walk_string)
 
