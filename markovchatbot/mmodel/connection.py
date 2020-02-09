@@ -9,6 +9,17 @@ class Connection:
             return False
         return self.weight > other.weight
 
+    def __str__(self):
+        source_node_word = self.source_node.word
+        if source_node_word is None:
+            source_node_word = "RootWord"
+        else:
+            source_node_word = "'" + source_node_word  + "'"
+        return "" + source_node_word + " -> '" + self.destination_node.word + "' with weight " + str(self.weight)
+
+    def __repr__(self):
+        return self.__str__()
+
     def boost(self, weight_boost=1):
         self.weight += weight_boost
 

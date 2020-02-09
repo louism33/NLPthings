@@ -1,5 +1,6 @@
 from chatbot.markovchatbot.mmodel.connection import Connection
-
+from numpy.random import choice
+from random import randint
 
 class Node:
     def __init__(self, word: str):
@@ -10,6 +11,9 @@ class Node:
         if (self.word == None):
             return "Root Node with " + str(len(self.connections)) + " connections."
         return "Node: '" + self.word + "' with " + str(len(self.connections)) + " connections."
+
+    def __repr__(self):
+        return self.__str__()
 
     def add_connection(self, source_node, destination_node, weight):
         self.connections.append(Connection(source_node, destination_node, weight))
@@ -39,7 +43,29 @@ class Node:
     def get_strongest_connection(self) -> Connection:
         if not self.connections:
             return None
+            # raise Exception("No available connections")
         return max(self.connections)
+
+    def get_connection_next_connection_weighted(self) -> Connection:
+        if not self.connections:
+            return None
+            # raise Exception("No available connections")
+        # print(self.connections)
+
+        if len(self.connections) == 1:
+            return self.connections[0]
+
+        weights = [connection.weight for connection in self.connections]
+        total = sum(weights)
+        weights[:] = [x / total for x in weights]
+
+        # print(self.connections)
+        # print(weights)
+
+        values = choice(self.connections, p=weights)
+        # print(values)
+
+        return values
 
     def get_strongest_connection_word(self) -> Connection:
         return max(self.connections).word
