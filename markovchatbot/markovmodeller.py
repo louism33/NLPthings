@@ -7,15 +7,24 @@ separator = " "
 
 def build_markov_model(text):
     # print("building mm")
-    tokens = nltk.word_tokenize(text)
-    print(tokens)
 
+    sentences = nltk.sent_tokenize(text)
     model = MarkovModel()
-    old_token = None
-    for token in tokens:
-        model.add_node_if_not_present(token.lower())
-        model.connect(old_token, token.lower())
-        old_token = token
+
+    # print(sentences)
+    for sentence in sentences:
+        tokens = nltk.word_tokenize(sentence)
+        # print()
+        # print(sentence)
+        # print(tokens)
+
+        old_token = None
+        for token in tokens:
+            # print("doing -- " + token)
+            token = token.lower()
+            model.add_node_if_not_present(token)
+            model.connect(old_token, token)
+            old_token = token
 
     return model
 

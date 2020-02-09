@@ -35,6 +35,7 @@ class MarkovModel:
         name = name.lower()
         for node in self.nodes:
             if node.word == name:
+                # print("exists")
                 return
         self.nodes.append(Node(name))
 

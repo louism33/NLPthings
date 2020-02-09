@@ -18,19 +18,9 @@ class Node:
         connected_node = self.get_connected_node(destination_node)
 
         if connected_node:
-            # print("boost connection:")
-            # print(connected_node)
-            # print()
-            connected_node.boost_connection(connected_node, weight)
+            self.boost_connection(connected_node, weight)
         else:
-            # print()
-            # print("new connection:")
-            # print(self)
-            # print("dest: " + str(destination_node))
             self.connections.append(Connection(self, destination_node, weight))
-            # print("length " + str(len(self.connections)))
-            # print(self)
-            # print()
 
     def boost_connection(self, destination_node, weight_boost=1):
         for conn in self.connections:

@@ -4,7 +4,7 @@ from chatbot.markovchatbot import markovmodeller
 from chatbot.markovchatbot.mmodel.markovmodel import MarkovModel
 
 
-class Test_Markov(TestCase):
+class Test_Markov_Basics(TestCase):
     basic_text = "Hello I am a robot"
     basic_text_repetition = "Hello I am a robot robot robot"
     basic_text_repetition_normalise = "Hello I am a Robot robot rObOt"
@@ -73,4 +73,27 @@ class Test_Markov(TestCase):
         self.assertEqual(len(model), 6)
         walk_string = markovmodeller.get_totally_random_walk(model)
         self.assertEqual("hello i am a robot .", walk_string)
+
+
+class Test_Markov_Multiple(TestCase):
+    basic_text = "Hello I am a robot. Hello I am a robot."
+    basic_text_cyborg = "Hello I am a robot. Hello I am a robot. heLlO i Am A hUmAn"
+
+    def test_build_markov_model(self):
+        model = markovmodeller.build_markov_model(self.basic_text)
+        self.assertIsInstance(model, MarkovModel)
+        self.assertEqual(len(model), 6)
+        start_node = model.get_start_node()
+        self.assertEqual(len(start_node.connections), 1)
+        self.assertEqual(len(model.find_node_by_name("i").connections), 1)
+        self.assertEqual(len(model.find_node_by_name("am").connections), 1)
+
+    def test_build_markov_model_cyborg(self):
+        model = markovmodeller.build_markov_model(self.basic_text_cyborg)
+        self.assertEqual(len(model), 7)
+        start_node = model.get_start_node()
+        self.assertEqual(len(start_node.connections), 1)
+        self.assertEqual(len(model.find_node_by_name("i").connections), 1)
+        self.assertEqual(len(model.find_node_by_name("am").connections), 1)
+        self.assertEqual(len(model.find_node_by_name("a").connections), 2)
 
