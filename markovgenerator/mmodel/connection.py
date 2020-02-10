@@ -14,7 +14,7 @@ class Connection:
         if source_node_word is None:
             source_node_word = "RootWord"
         else:
-            source_node_word = "'" + source_node_word  + "'"
+            source_node_word = "'" + source_node_word + "'"
         return "" + source_node_word + " -> '" + self.destination_node.word + "' with weight " + str(self.weight)
 
     def __repr__(self):

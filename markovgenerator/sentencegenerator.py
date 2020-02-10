@@ -1,18 +1,16 @@
-from nltk.corpus import gutenberg, genesis
+from nltk.corpus import gutenberg
 from nltk.text import Text
 
-from chatbot.markovchatbot import markovmodeller
+from chatbot.markovgenerator import markovmodeller
 
 if __name__ == "__main__":
     my_essay = True
     if my_essay:
         txt = ""
-        with open('texts/ans.txt') as text:
+        with open('res/ans.txt') as text:
             for line in text:
                 txt += line
-                # print(line)
 
-        # print(input)
         model = markovmodeller.build_markov_model_from_string(txt)
 
     else:
@@ -25,5 +23,3 @@ if __name__ == "__main__":
         x = input("--- type X to stop")
         if x == "X":
             break
-
-

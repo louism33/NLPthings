@@ -1,29 +1,22 @@
 import nltk
 
-from chatbot.markovchatbot.mmodel.markovmodel import MarkovModel
+from chatbot.markovgenerator.mmodel.markovmodel import MarkovModel
 
 separator = " "
 
 
-def build_markov_model(text):
-    pass
-
 def build_markov_model_from_list_of_sentences(listlist):
     model = MarkovModel()
-    i = 0
     for sentence in listlist:
-        # print(sentence)
-        i += 1
-        # print(str(i) + "  " + str(len(listlist)))
         old_token = None
         for token in sentence:
-            # print("doing -- " + token)
             token = token.lower()
             model.add_node_if_not_present(token)
             model.connect(old_token, token)
             old_token = token
 
     return model
+
 
 def build_markov_model_from_string(text):
     sentences = nltk.sent_tokenize(text)

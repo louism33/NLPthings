@@ -1,7 +1,7 @@
 from unittest import TestCase
 
-from chatbot.markovchatbot import markovmodeller
-from chatbot.markovchatbot.mmodel.markovmodel import MarkovModel
+from chatbot.markovgenerator import markovmodeller
+from chatbot.markovgenerator.mmodel.markovmodel import MarkovModel
 
 
 class Test_Markov_Basics(TestCase):
@@ -127,4 +127,3 @@ class Test_Markov_Multiple(TestCase):
         self.assertTrue("mr anderson ." == walk_string
                         or "madame bovary ." == walk_string
                         or "lord buckethead ." == walk_string)
-
